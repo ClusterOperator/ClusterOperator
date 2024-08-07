@@ -1,0 +1,39 @@
+bind:
+  host: 0.0.0.0
+  port: 8080
+logging:
+  level: info
+  out_put: fileAndStd
+  max_age: 2592000
+  rotation: 86400
+db:
+  host: localhost
+  port: 3306
+  user: root
+  password: KubeOperator123@mysql
+  name: ko
+  max_open_conns: 200
+  max_idle_conns: 10
+jwt:
+  secret: iXDgDaEYBzIzustW
+  exp: 480
+job:
+  timeout: 60
+kobe:
+  host: localhost
+  port: 8080
+kotf:
+  host: localhost
+  port: 8080
+webkubectl:
+  host: webkubectl
+  port: 8080
+kubepi:
+  host: localhost
+  port: 80
+  username: admin
+  password: kubepi
+cron:
+  enable: true
+encrypt:
+  key: KubeOperator@202

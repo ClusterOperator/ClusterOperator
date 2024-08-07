@@ -1,0 +1,4443 @@
+basePath: /api/v1
+definitions:
+  condition.Condition:
+    properties:
+      field:
+        type: string
+      operator:
+        type: string
+      value: {}
+    type: object
+  condition.Conditions:
+    additionalProperties:
+      $ref: '#/definitions/condition.Condition'
+    type: object
+  dto.BackupAccount:
+    properties:
+      bucket:
+        type: string
+      clusters:
+        type: string
+      createdAt:
+        type: string
+      credential:
+        type: string
+      credentialVars: {}
+      id:
+        type: string
+      name:
+        type: string
+      projects:
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.BackupAccountRequest:
+    properties:
+      bucket:
+        type: string
+      clusters:
+        items:
+          type: string
+        type: array
+      credentialVars: {}
+      name:
+        type: string
+      projects:
+        items:
+          type: string
+        type: array
+      type:
+        type: string
+    required:
+    - bucket
+    - credentialVars
+    - name
+    - type
+    type: object
+  dto.BackupAccountUpdate:
+    properties:
+      bucket:
+        type: string
+      credentialVars: {}
+      id:
+        type: string
+      name:
+        type: string
+      projects:
+        items:
+          type: string
+        type: array
+      type:
+        type: string
+    required:
+    - bucket
+    - credentialVars
+    - id
+    - name
+    - type
+    type: object
+  dto.CloudRegionResponse:
+    properties:
+      result: {}
+    type: object
+  dto.Cluster:
+    properties:
+      architectures:
+        type: string
+      createdAt:
+        type: string
+      dirty:
+        type: boolean
+      logId:
+        type: string
+      message:
+        type: string
+      multiClusterRepositories:
+        items:
+          $ref: '#/definitions/model.MultiClusterRepository'
+        type: array
+      multiClusterRepository:
+        type: string
+      name:
+        type: string
+      nodeNameRule:
+        type: string
+      nodeSize:
+        type: integer
+      preStatus:
+        type: string
+      projectID:
+        type: string
+      projectName:
+        type: string
+      provider:
+        type: string
+      source:
+        type: string
+      spec:
+        $ref: '#/definitions/model.ClusterSpec'
+      status:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.ClusterBackupFileCreate:
+    properties:
+      clusterBackupStrategyId:
+        type: string
+      clusterName:
+        type: string
+      folder:
+        type: string
+      name:
+        type: string
+    required:
+    - clusterBackupStrategyId
+    - clusterName
+    type: object
+  dto.ClusterBackupFileRestore:
+    properties:
+      backupAccount:
+        $ref: '#/definitions/model.BackupAccount'
+      clusterName:
+        type: string
+      file:
+        $ref: '#/definitions/model.ClusterBackupFile'
+      name:
+        type: string
+    required:
+    - clusterName
+    - name
+    type: object
+  dto.ClusterBackupStrategy:
+    properties:
+      backupAccountId:
+        type: string
+      backupAccountName:
+        type: string
+      clusterId:
+        type: string
+      clusterName:
+        type: string
+      createdAt:
+        type: string
+      cron:
+        type: integer
+      id:
+        type: string
+      saveNum:
+        type: integer
+      status:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.ClusterBackupStrategyRequest:
+    properties:
+      backupAccountName:
+        type: string
+      clusterName:
+        type: string
+      cron:
+        maximum: 300
+        minimum: 1
+        type: integer
+      id:
+        type: string
+      saveNum:
+        maximum: 100
+        minimum: 1
+        type: integer
+      status:
+        type: string
+    required:
+    - backupAccountName
+    - clusterName
+    type: object
+  dto.ClusterCreate:
+    properties:
+      architectures:
+        type: string
+      calicoIpv4PoolIpip:
+        type: string
+      ciliumNativeRoutingCidr:
+        type: string
+      ciliumTunnelMode:
+        type: string
+      ciliumVersion:
+        type: string
+      containerdStorageDIr:
+        type: string
+      dnsCacheVersion:
+        type: string
+      dockerStorageDIr:
+        type: string
+      dockerSubnet:
+        type: string
+      enableDnsCache:
+        type: string
+      flannelBackend:
+        type: string
+      helmVersion:
+        type: string
+      ingressControllerType:
+        type: string
+      kubeApiServerPort:
+        type: integer
+      kubePodSubnet:
+        type: string
+      kubeProxyMode:
+        type: string
+      kubeServiceNodePortRange:
+        type: string
+      kubeServiceSubnet:
+        type: string
+      kubernetesAudit:
+        type: string
+      lbKubeApiserverIp:
+        type: string
+      lbMode:
+        type: string
+      masterScheduleType:
+        type: string
+      maxNodeNum:
+        type: integer
+      maxNodePodNum:
+        type: integer
+      name:
+        type: string
+      networkCidr:
+        type: string
+      networkInterface:
+        type: string
+      networkType:
+        type: string
+      nodeNameRule:
+        type: string
+      nodeportAddress:
+        type: string
+      nodes:
+        items:
+          $ref: '#/definitions/dto.NodeCreate'
+        type: array
+      plan:
+        type: string
+      projectName:
+        type: string
+      provider:
+        type: string
+      runtimeType:
+        type: string
+      supportGpu:
+        type: string
+      version:
+        type: string
+      workerAmount:
+        type: integer
+      yumOperate:
+        type: string
+    required:
+    - name
+    - nodeNameRule
+    - version
+    type: object
+  dto.ClusterImport:
+    properties:
+      apiServer:
+        type: string
+      architectures:
+        type: string
+      clusterInfo:
+        $ref: '#/definitions/dto.clusterInfo'
+      isKoCluster:
+        type: boolean
+      name:
+        type: string
+      projectName:
+        type: string
+      router:
+        type: string
+      token:
+        type: string
+    type: object
+  dto.ClusterLoad:
+    properties:
+      apiServer:
+        type: string
+      architectures:
+        type: string
+      name:
+        type: string
+      router:
+        type: string
+      token:
+        type: string
+    type: object
+  dto.ClusterLoadInfo:
+    properties:
+      architectures:
+        type: string
+      enableDnsCache:
+        type: string
+      ingressControllerType:
+        type: string
+      kubeApiServerPort:
+        type: integer
+      kubeMaxPods:
+        type: integer
+      kubeNetworkNodePrefix:
+        type: integer
+      kubePodSubnet:
+        type: string
+      kubeProxyMode:
+        type: string
+      kubeServiceNodePortRange:
+        type: string
+      kubeServiceSubnet:
+        type: string
+      kubernetesAudit:
+        type: string
+      lbKubeApiserverIp:
+        type: string
+      lbMode:
+        type: string
+      masterScheduleType:
+        type: string
+      maxNodeNum:
+        type: integer
+      maxNodePodNum:
+        type: integer
+      name:
+        type: string
+      networkType:
+        type: string
+      nodeNameRule:
+        type: string
+      nodeportAddress:
+        type: string
+      nodes:
+        items:
+          $ref: '#/definitions/dto.NodesFromK8s'
+        type: array
+      runtimeType:
+        type: string
+      supportGpu:
+        type: string
+      version:
+        type: string
+    type: object
+  dto.ClusterManifest:
+    properties:
+      coreVars:
+        items:
+          $ref: '#/definitions/dto.NameVersion'
+        type: array
+      isActive:
+        type: boolean
+      name:
+        type: string
+      networkVars:
+        items:
+          $ref: '#/definitions/dto.NameVersion'
+        type: array
+      otherVars:
+        items:
+          $ref: '#/definitions/dto.NameVersion'
+        type: array
+      storageVars:
+        items:
+          $ref: '#/definitions/dto.NameVersion'
+        type: array
+      toolVars:
+        items:
+          $ref: '#/definitions/dto.NameVersion'
+        type: array
+      version:
+        type: string
+    type: object
+  dto.ClusterManifestGroup:
+    properties:
+      clusterManifests:
+        items:
+          $ref: '#/definitions/dto.ClusterManifest'
+        type: array
+      largeVersion:
+        type: string
+    type: object
+  dto.ClusterManifestUpdate:
+    properties:
+      isActive:
+        type: boolean
+      name:
+        type: string
+      version:
+        type: string
+    type: object
+  dto.ClusterMemberCreate:
+    properties:
+      usernames:
+        items:
+          type: string
+        type: array
+    required:
+    - usernames
+    type: object
+  dto.ClusterResourceCreate:
+    properties:
+      names:
+        items:
+          type: string
+        type: array
+      resourceType:
+        type: string
+    required:
+    - names
+    - resourceType
+    type: object
+  dto.ClusterUpgrade:
+    properties:
+      clusterName:
+        type: string
+      version:
+        type: string
+    type: object
+  dto.Credential:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      privateKey:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.CredentialCreate:
+    properties:
+      name:
+        type: string
+      password:
+        type: string
+      privateKey:
+        type: string
+      type:
+        type: string
+      username:
+        type: string
+    required:
+    - name
+    - type
+    - username
+    type: object
+  dto.CredentialOfHostCreate:
+    properties:
+      name:
+        type: string
+      password:
+        type: string
+      privateKey:
+        type: string
+      type:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.CredentialUpdate:
+    properties:
+      password:
+        type: string
+      privateKey:
+        type: string
+      type:
+        type: string
+      username:
+        type: string
+    required:
+    - type
+    type: object
+  dto.Host:
+    properties:
+      architecture:
+        type: string
+      clusterId:
+        type: string
+      clusterName:
+        type: string
+      cpuCore:
+        type: integer
+      createdAt:
+        type: string
+      credentialId:
+        type: string
+      credentialName:
+        type: string
+      datastore:
+        type: string
+      flexIp:
+        type: string
+      gpuInfo:
+        type: string
+      gpuNum:
+        type: integer
+      hasGpu:
+        type: boolean
+      ip:
+        type: string
+      memory:
+        type: integer
+      message:
+        type: string
+      name:
+        type: string
+      os:
+        type: string
+      osVersion:
+        type: string
+      port:
+        type: integer
+      projectName:
+        type: string
+      status:
+        type: string
+      updatedAt:
+        type: string
+      volumes:
+        items:
+          $ref: '#/definitions/model.Volume'
+        type: array
+      zoneId:
+        type: string
+      zoneName:
+        type: string
+    type: object
+  dto.HostCreate:
+    properties:
+      cluster:
+        type: string
+      credential:
+        $ref: '#/definitions/dto.CredentialOfHostCreate'
+      credentialId:
+        type: string
+      flexIp:
+        type: string
+      ip:
+        type: string
+      name:
+        type: string
+      port:
+        type: integer
+      project:
+        type: string
+    required:
+    - ip
+    - name
+    - port
+    - project
+    type: object
+  dto.HostSync:
+    properties:
+      hostName:
+        type: string
+      hostStatus:
+        type: string
+    type: object
+  dto.HostUptate:
+    properties:
+      credential:
+        $ref: '#/definitions/dto.CredentialOfHostCreate'
+      credentialId:
+        type: string
+      flexIp:
+        type: string
+      ip:
+        type: string
+      name:
+        type: string
+      port:
+        type: integer
+    required:
+    - ip
+    - name
+    - port
+    type: object
+  dto.Ip:
+    properties:
+      address:
+        type: string
+      clusterId:
+        type: string
+      createdAt:
+        type: string
+      dns1:
+        type: string
+      dns2:
+        type: string
+      gateway:
+        type: string
+      id:
+        type: string
+      ipPool:
+        $ref: '#/definitions/model.IpPool'
+      ipPoolId:
+        type: string
+      status:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.IpCreate:
+    properties:
+      dns1:
+        type: string
+      dns2:
+        type: string
+      gateway:
+        type: string
+      ipEnd:
+        type: string
+      ipPoolName:
+        type: string
+      ipStart:
+        type: string
+    type: object
+  dto.IpPool:
+    properties:
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      ipUsed:
+        type: integer
+      ips:
+        items:
+          $ref: '#/definitions/model.Ip'
+        type: array
+      name:
+        type: string
+      subnet:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.IpPoolCreate:
+    properties:
+      description:
+        type: string
+      dns1:
+        type: string
+      dns2:
+        type: string
+      gateway:
+        type: string
+      ipEnd:
+        type: string
+      ipStart:
+        type: string
+      name:
+        type: string
+      subnet:
+        type: string
+    type: object
+  dto.IpUpdate:
+    properties:
+      address:
+        type: string
+      operation:
+        type: string
+    type: object
+  dto.LoginCredential:
+    properties:
+      authMethod:
+        type: string
+      captchaId:
+        type: string
+      code:
+        type: string
+      language:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.NameVersion:
+    properties:
+      name:
+        type: string
+      version:
+        type: string
+    type: object
+  dto.Node:
+    properties:
+      clusterId:
+        type: string
+      createdAt:
+        type: string
+      dirty:
+        type: boolean
+      ip:
+        description: Info v1.Node `json:"info"`
+        type: string
+      message:
+        type: string
+      name:
+        type: string
+      preStatus:
+        type: string
+      role:
+        type: string
+      status:
+        type: string
+      statusId:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.NodeBatch:
+    properties:
+      hosts:
+        items:
+          type: string
+        type: array
+      increase:
+        type: integer
+      isForce:
+        type: boolean
+      nodes:
+        items:
+          type: string
+        type: array
+      operation:
+        type: string
+      statusID:
+        type: string
+      supportGpu:
+        type: string
+    type: object
+  dto.NodeCreate:
+    properties:
+      hostName:
+        type: string
+      role:
+        type: string
+    type: object
+  dto.NodesFromK8s:
+    properties:
+      architecture:
+        type: string
+      credentialID:
+        type: string
+      ip:
+        type: string
+      name:
+        type: string
+      port:
+        type: integer
+      role:
+        type: string
+    type: object
+  dto.NtpServer:
+    properties:
+      address:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.NtpServerCreate:
+    properties:
+      address:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+    required:
+    - address
+    - name
+    - status
+    type: object
+  dto.NtpServerUpdate:
+    properties:
+      address:
+        type: string
+      status:
+        type: string
+    required:
+    - address
+    - status
+    type: object
+  dto.Plan:
+    properties:
+      createdAt:
+        type: string
+      deployTemplate:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      planVars: {}
+      projects:
+        items:
+          type: string
+        type: array
+      provider:
+        type: string
+      region:
+        type: string
+      regionId:
+        type: string
+      updatedAt:
+        type: string
+      vars:
+        type: string
+      zones:
+        items:
+          type: string
+        type: array
+    type: object
+  dto.PlanCreate:
+    properties:
+      deployTemplate:
+        type: string
+      name:
+        type: string
+      planVars: {}
+      projects:
+        items:
+          type: string
+        type: array
+      region:
+        type: string
+      zones:
+        items:
+          type: string
+        type: array
+    required:
+    - deployTemplate
+    - name
+    - planVars
+    - projects
+    - region
+    - zones
+    type: object
+  dto.PlanUpdate:
+    properties:
+      planVars: {}
+      projects:
+        items:
+          type: string
+        type: array
+    required:
+    - planVars
+    - projects
+    type: object
+  dto.Profile:
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/dto.SessionUser'
+    type: object
+  dto.Project:
+    properties:
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.ProjectCreate:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+    required:
+    - name
+    type: object
+  dto.ProjectMember:
+    properties:
+      createdAt:
+        type: string
+      email:
+        type: string
+      role:
+        type: string
+      updatedAt:
+        type: string
+      userStatus:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.ProjectMemberCreate:
+    properties:
+      usernames:
+        items:
+          type: string
+        type: array
+    required:
+    - usernames
+    type: object
+  dto.ProjectResource:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: string
+      projectId:
+        type: string
+      resourceId:
+        type: string
+      resourceName:
+        type: string
+      resourceType:
+        type: string
+      updatedAt:
+        type: string
+    required:
+    - projectId
+    - resourceId
+    - resourceType
+    type: object
+  dto.ProjectResourceCreate:
+    properties:
+      names:
+        items:
+          type: string
+        type: array
+      resourceType:
+        type: string
+    required:
+    - names
+    - resourceType
+    type: object
+  dto.ProjectUpdate:
+    properties:
+      description:
+        type: string
+    type: object
+  dto.Region:
+    properties:
+      createdAt:
+        type: string
+      datacenter:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      provider:
+        type: string
+      regionVars: {}
+      updatedAt:
+        type: string
+      vars:
+        type: string
+    type: object
+  dto.RegionCreate:
+    properties:
+      datacenter:
+        type: string
+      name:
+        type: string
+      provider:
+        type: string
+      regionVars: {}
+    required:
+    - datacenter
+    - name
+    - provider
+    - regionVars
+    type: object
+  dto.RegionDatacenterRequest:
+    properties:
+      regionVars: {}
+    required:
+    - regionVars
+    type: object
+  dto.RegionUpdate:
+    properties:
+      datacenter:
+        type: string
+      name:
+        type: string
+      provider:
+        type: string
+      regionVars: {}
+    required:
+    - datacenter
+    - name
+    - provider
+    - regionVars
+    type: object
+  dto.RepoChangePassword:
+    properties:
+      id:
+        type: string
+      original:
+        type: string
+      password:
+        type: string
+    type: object
+  dto.SessionUser:
+    properties:
+      currentProject:
+        type: string
+      email:
+        type: string
+      isActive:
+        type: boolean
+      isAdmin:
+        type: boolean
+      isSuper:
+        type: boolean
+      language:
+        type: string
+      name:
+        type: string
+      roles:
+        items:
+          type: string
+        type: array
+      userId:
+        type: string
+    type: object
+  dto.SystemRegistry:
+    properties:
+      architecture:
+        type: string
+      createdAt:
+        type: string
+      hostname:
+        type: string
+      id:
+        type: string
+      message:
+        type: string
+      nexusPassword:
+        type: string
+      protocol:
+        type: string
+      registryHostedPort:
+        type: integer
+      registryPort:
+        type: integer
+      repoPort:
+        type: integer
+      status:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.SystemRegistryUpdate:
+    properties:
+      hostname:
+        type: string
+      id:
+        type: string
+      nexusPassword:
+        type: string
+      protocol:
+        type: string
+      registryHostedPort:
+        type: integer
+      registryPort:
+        type: integer
+      repoPort:
+        type: integer
+    required:
+    - hostname
+    - id
+    - nexusPassword
+    - protocol
+    - registryHostedPort
+    - registryPort
+    - repoPort
+    type: object
+  dto.SystemSetting:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: string
+      key:
+        type: string
+      tab:
+        type: string
+      updatedAt:
+        type: string
+      value:
+        type: string
+    type: object
+  dto.SystemSettingCreate:
+    properties:
+      tab:
+        type: string
+      vars:
+        additionalProperties:
+          type: string
+        type: object
+    required:
+    - tab
+    - vars
+    type: object
+  dto.SystemSettingResult:
+    properties:
+      tab:
+        type: string
+      vars:
+        additionalProperties:
+          type: string
+        type: object
+    required:
+    - tab
+    - vars
+    type: object
+  dto.TemplateConfig:
+    properties:
+      config:
+        additionalProperties: true
+        type: object
+      createdAt:
+        type: string
+      name:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.User:
+    properties:
+      createdAt:
+        type: string
+      currentProject:
+        type: string
+      email:
+        type: string
+      language:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.UserChangePassword:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      original:
+        type: string
+      password:
+        type: string
+    type: object
+  dto.UserCreate:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+    required:
+    - email
+    - name
+    - password
+    - role
+    type: object
+  dto.UserUpdate:
+    properties:
+      currentProject:
+        type: string
+      email:
+        type: string
+      language:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.VmConfig:
+    properties:
+      cpu:
+        type: integer
+      createdAt:
+        type: string
+      disk:
+        type: integer
+      memory:
+        type: integer
+      name:
+        type: string
+      provider:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  dto.VmConfigCreate:
+    properties:
+      cpu:
+        maximum: 1000
+        minimum: 1
+        type: integer
+      memory:
+        maximum: 1000
+        minimum: 1
+        type: integer
+      name:
+        type: string
+      provider:
+        type: string
+    required:
+    - cpu
+    - memory
+    - name
+    type: object
+  dto.VmConfigUpdate:
+    properties:
+      cpu:
+        maximum: 1000
+        minimum: 1
+        type: integer
+      memory:
+        maximum: 1000
+        minimum: 1
+        type: integer
+      name:
+        type: string
+      provider:
+        type: string
+    required:
+    - cpu
+    - memory
+    type: object
+  dto.Zone:
+    properties:
+      cloudVars: {}
+      createdAt:
+        type: string
+      credentialId:
+        type: string
+      credentialName:
+        type: string
+      id:
+        type: string
+      ipPool:
+        $ref: '#/definitions/dto.IpPool'
+      ipPoolId:
+        type: string
+      ipPoolName:
+        type: string
+      name:
+        type: string
+      provider:
+        type: string
+      regionID:
+        type: string
+      regionName:
+        type: string
+      status:
+        type: string
+      updatedAt:
+        type: string
+      vars:
+        type: string
+    type: object
+  dto.ZoneCreate:
+    properties:
+      cloudVars: {}
+      credentialName:
+        type: string
+      ipPoolName:
+        type: string
+      name:
+        type: string
+      regionName:
+        type: string
+    required:
+    - cloudVars
+    - name
+    - regionName
+    type: object
+  dto.ZoneUpdate:
+    properties:
+      cloudVars: {}
+      credentialName:
+        type: string
+      id:
+        type: string
+      ipPoolName:
+        type: string
+      name:
+        type: string
+      regionID:
+        type: string
+    required:
+    - cloudVars
+    - id
+    - ipPoolName
+    - name
+    - regionID
+    type: object
+  dto.clusterInfo:
+    properties:
+      architectures:
+        type: string
+      calicoIpv4PoolIpip:
+        type: string
+      ciliumNativeRoutingCidr:
+        type: string
+      ciliumTunnelMode:
+        type: string
+      ciliumVersion:
+        type: string
+      containerdStorageDIr:
+        type: string
+      dnsCacheVersion:
+        type: string
+      dockerStorageDIr:
+        type: string
+      dockerSubnet:
+        type: string
+      enableDnsCache:
+        type: string
+      flannelBackend:
+        type: string
+      helmVersion:
+        type: string
+      ingressControllerType:
+        type: string
+      kubeApiServerPort:
+        type: integer
+      kubeMaxPods:
+        type: integer
+      kubeNetworkNodePrefix:
+        type: integer
+      kubePodSubnet:
+        type: string
+      kubeProxyMode:
+        type: string
+      kubeServiceNodePortRange:
+        type: string
+      kubeServiceSubnet:
+        type: string
+      kubernetesAudit:
+        type: string
+      lbKubeApiserverIp:
+        type: string
+      lbMode:
+        type: string
+      maxNodeNum:
+        type: integer
+      maxNodePodNum:
+        type: integer
+      name:
+        type: string
+      networkCidr:
+        type: string
+      networkInterface:
+        type: string
+      networkType:
+        type: string
+      nodeNameRule:
+        type: string
+      nodeportAddress:
+        type: string
+      nodes:
+        items:
+          $ref: '#/definitions/dto.NodesFromK8s'
+        type: array
+      provider:
+        type: string
+      runtimeType:
+        type: string
+      supportGpu:
+        type: string
+      version:
+        type: string
+      yumOperate:
+        type: string
+    required:
+    - version
+    type: object
+  model.BackupAccount:
+    properties:
+      bucket:
+        type: string
+      createdAt:
+        type: string
+      credential:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  model.ClusterBackupFile:
+    properties:
+      clusterBackupStrategyId:
+        type: string
+      clusterId:
+        type: string
+      createdAt:
+        type: string
+      folder:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  model.ClusterSpec:
+    properties:
+      architectures:
+        type: string
+      calicoIpv4PoolIpip:
+        type: string
+      ciliumNativeRoutingCidr:
+        type: string
+      ciliumTunnelMode:
+        type: string
+      ciliumVersion:
+        type: string
+      containerdStorageDir:
+        type: string
+      createdAt:
+        type: string
+      dnsCacheVersion:
+        type: string
+      docker_subnet:
+        type: string
+      dockerStorageDir:
+        type: string
+      enableDnsCache:
+        type: string
+      flannelBackend:
+        type: string
+      helmVersion:
+        type: string
+      ingressControllerType:
+        type: string
+      kubeApiServerPort:
+        type: integer
+      kubeMaxPods:
+        type: integer
+      kubeNetworkNodePrefix:
+        type: integer
+      kubePodSubnet:
+        type: string
+      kubeProxyMode:
+        type: string
+      kubeRouter:
+        type: string
+      kubeServiceNodePortRange:
+        type: string
+      kubeServiceSubnet:
+        type: string
+      kubernetesAudit:
+        type: string
+      lbKubeApiserverIp:
+        type: string
+      lbMode:
+        type: string
+      masterScheduleType:
+        type: string
+      maxNodeNum:
+        type: integer
+      networkCidr:
+        type: string
+      networkInterface:
+        type: string
+      networkType:
+        type: string
+      nodeportAddress:
+        type: string
+      provider:
+        type: string
+      runtimeType:
+        type: string
+      supportGpu:
+        type: string
+      updatedAt:
+        type: string
+      upgradeVersion:
+        type: string
+      version:
+        type: string
+      workerAmount:
+        type: integer
+      yumOperate:
+        type: string
+    type: object
+  model.Ip:
+    properties:
+      address:
+        type: string
+      clusterId:
+        type: string
+      createdAt:
+        type: string
+      dns1:
+        type: string
+      dns2:
+        type: string
+      gateway:
+        type: string
+      id:
+        type: string
+      ipPoolId:
+        type: string
+      status:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  model.IpPool:
+    properties:
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      ips:
+        items:
+          $ref: '#/definitions/model.Ip'
+        type: array
+      name:
+        type: string
+      subnet:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  model.MultiClusterRepository:
+    properties:
+      branch:
+        type: string
+      createdAt:
+        type: string
+      gitTimeout:
+        type: integer
+      lastSyncHead:
+        type: string
+      lastSyncTime:
+        type: string
+      message:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      source:
+        type: string
+      status:
+        type: string
+      syncEnable:
+        type: boolean
+      syncInterval:
+        type: integer
+      syncStatus:
+        type: string
+      updatedAt:
+        type: string
+      username:
+        type: string
+    type: object
+  model.Volume:
+    properties:
+      createdAt:
+        type: string
+      hostId:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      size:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  page.Page:
+    properties:
+      items: {}
+      total:
+        type: integer
+    type: object
+info:
+  contact:
+    email: support@fit2cloud.com
+    name: Fit2cloud Support
+    url: https://www.fit2cloud.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://kubeoperator.io
+  title: KubeOperator Restful API
+paths:
+  /auth/session/:
+    delete:
+      consumes:
+      - application/json
+      description: Logout
+      produces:
+      - application/json
+      responses: {}
+      summary: Logout
+      tags:
+      - auth
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginCredential'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Profile'
+      summary: Login
+      tags:
+      - auth
+  /backupAccounts/{name}/:
+    delete:
+      consumes:
+      - application/json
+      description: 删除备份账号
+      parameters:
+      - description: 备份账号名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a backupAccount
+      tags:
+      - backupAccounts
+    patch:
+      consumes:
+      - application/json
+      description: 更新备份账号
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BackupAccountUpdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BackupAccount'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a backupAccount
+      tags:
+      - backupAccounts
+  /backupaccounts/:
+    get:
+      consumes:
+      - application/json
+      description: 获取备份账号列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all backupAccounts
+      tags:
+      - backupAccounts
+    post:
+      consumes:
+      - application/json
+      description: 创建备份账号
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BackupAccountRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BackupAccount'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a backupAccount
+      tags:
+      - backupAccounts
+  /backupaccounts/{name}/:
+    get:
+      consumes:
+      - application/json
+      description: show a backupaccounts by name
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BackupAccount'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a backupaccounts
+      tags:
+      - backupaccounts
+  /backupaccounts/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤备份账号
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search backupAccount
+      tags:
+      - backupAccounts
+  /cluster/backup/files/:
+    get:
+      consumes:
+      - application/json
+      description: Show backupFiles
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all backupFiles
+      tags:
+      - backupFiles
+  /cluster/backup/files/{name}/:
+    delete:
+      consumes:
+      - application/json
+      description: delete a BackupFile by name
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a BackupFile
+      tags:
+      - backupFiles
+  /cluster/backup/files/backup/:
+    post:
+      consumes:
+      - application/json
+      description: Backup CLuster
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterBackupFileCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: Backup CLuster
+      tags:
+      - backupFiles
+  /cluster/backup/files/restore/:
+    post:
+      consumes:
+      - application/json
+      description: Restore CLuster
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterBackupFileRestore'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: Restore CLuster
+      tags:
+      - backupFiles
+  /cluster/backup/strategy/:
+    post:
+      consumes:
+      - application/json
+      description: create a Backup Strategy
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterBackupStrategyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ClusterBackupStrategy'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a Backup Strategy
+      tags:
+      - backupStrategy
+  /cluster/backup/strategy/{clusterName}/:
+    get:
+      consumes:
+      - application/json
+      description: Get Cluster Backup Strategy
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ClusterBackupStrategy'
+      security:
+      - ApiKeyAuth: []
+      summary: Get Cluster Backup Strategy
+      tags:
+      - backupStrategy
+  /clusters/:
+    get:
+      consumes:
+      - application/json
+      description: Show clusters
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all clusters
+      tags:
+      - clusters
+    post:
+      consumes:
+      - application/json
+      description: Create a cluster
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Cluster'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a cluster
+      tags:
+      - clusters
+  /clusters/{name}/:
+    delete:
+      consumes:
+      - application/json
+      description: delete a cluster by name
+      parameters:
+      - description: 是否强制（true, false）
+        in: query
+        name: force
+        required: true
+        type: string
+      - description: 是否卸载（true, false）
+        in: query
+        name: uninstall
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a cluster
+      tags:
+      - clusters
+    get:
+      consumes:
+      - application/json
+      description: Show a cluster
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Cluster'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a cluster
+      tags:
+      - clusters
+  /clusters/import/:
+    post:
+      consumes:
+      - application/json
+      description: import a cluster
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterImport'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Import a cluster
+      tags:
+      - clusters
+  /clusters/load:
+    post:
+      consumes:
+      - application/json
+      description: Upgrade a cluster
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterLoad'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ClusterLoadInfo'
+      security:
+      - ApiKeyAuth: []
+      summary: Load cluster info
+      tags:
+      - clusters
+  /clusters/name/{projectNames}:
+    get:
+      consumes:
+      - application/json
+      description: Show a cluster names of projects
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Cluster'
+      security:
+      - ApiKeyAuth: []
+      summary: Show cluster names of projects
+      tags:
+      - clusters
+  /clusters/node/{clusterName}:
+    get:
+      consumes:
+      - application/json
+      description: Get cluster nodes
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Get cluster nodes
+      tags:
+      - clusters
+  /clusters/node/{clusterName}/{nodeName}:
+    get:
+      consumes:
+      - application/json
+      description: Get cluster node details
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Node'
+      security:
+      - ApiKeyAuth: []
+      summary: Get cluster node details
+      tags:
+      - clusters
+  /clusters/node/batch/{clusterName}:
+    post:
+      consumes:
+      - application/json
+      description: Batch delete or create cluster node
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.NodeBatch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: Batch delete or create cluster node
+      tags:
+      - clusters
+  /clusters/node/recreate/{clusterName}:
+    post:
+      consumes:
+      - application/json
+      description: Recreate cluster node
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.NodeBatch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: Recreate cluster node
+      tags:
+      - clusters
+  /clusters/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤集群
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search cluster
+      tags:
+      - clusters
+  /clusters/status/{clusterName}/{nodeName}:
+    get:
+      consumes:
+      - application/json
+      description: Get cluster node status
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Node'
+      security:
+      - ApiKeyAuth: []
+      summary: Get cluster node status
+      tags:
+      - clusters
+  /clusters/upgrade:
+    post:
+      consumes:
+      - application/json
+      description: Upgrade a cluster
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterUpgrade'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: Upgrade a cluster
+      tags:
+      - clusters
+  /configs/{regionName}:
+    get:
+      consumes:
+      - application/json
+      description: 获取虚拟机配置
+      parameters:
+      - description: 区域名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: Array
+      security:
+      - ApiKeyAuth: []
+      summary: Get vmConfigs
+      tags:
+      - plans
+  /credentials/:
+    get:
+      consumes:
+      - application/json
+      description: Show credentials
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all credentials
+      tags:
+      - credentials
+    patch:
+      consumes:
+      - application/json
+      description: 更新单个凭据
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CredentialUpdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Credential'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a credential
+      tags:
+      - credentials
+    post:
+      consumes:
+      - application/json
+      description: 创建一个凭据
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CredentialCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Credential'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a credential
+      tags:
+      - credentials
+  /credentials/{name}/:
+    delete:
+      consumes:
+      - application/json
+      description: 通过名称删除单个凭据
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a credential
+      tags:
+      - credentials
+  /credentials/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤凭据
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search credential
+      tags:
+      - credentials
+  /host:
+    patch:
+      consumes:
+      - application/json
+      description: 更新主机信息
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.HostUptate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Host'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a host
+      tags:
+      - hosts
+  /host/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤主机
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search Host
+      tags:
+      - hosts
+  /hosts/:
+    get:
+      consumes:
+      - application/json
+      description: Show hosts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all hosts
+      tags:
+      - hosts
+    post:
+      consumes:
+      - application/json
+      description: create a host
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.HostCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Host'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a host
+      tags:
+      - hosts
+  /hosts/{name}/:
+    delete:
+      consumes:
+      - application/json
+      description: delete a host by name
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a host
+      tags:
+      - hosts
+    get:
+      consumes:
+      - application/json
+      description: show a host by name
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Host'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a host
+      tags:
+      - hosts
+  /hosts/sync:
+    post:
+      consumes:
+      - application/json
+      description: 同步主机状态
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.HostSync'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: Sync hosts
+      tags:
+      - hosts
+  /hosts/template/:
+    get:
+      consumes:
+      - application/json
+      description: download template file for import hosts
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Download Host Template File
+      tags:
+      - hosts
+  /hosts/upload/:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Upload File for import hosts
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Upload File for import
+      tags:
+      - hosts
+  /ippools:
+    get:
+      consumes:
+      - application/json
+      description: 获取IP池列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all ippools
+      tags:
+      - ippools
+    post:
+      consumes:
+      - application/json
+      description: 创建IP池
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.IpPoolCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.IpPool'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a IpPool
+      tags:
+      - ippools
+  /ippools/{ipPoolName}/ips/{name}:
+    patch:
+      consumes:
+      - application/json
+      description: 更新 Ip
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.IpUpdate'
+      - description: IP池名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Ip'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a Ip
+      tags:
+      - ips
+  /ippools/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除IP池
+      parameters:
+      - description: IP池名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a IpPool
+      tags:
+      - ippools
+    get:
+      consumes:
+      - application/json
+      description: 获取单个IP池
+      parameters:
+      - description: IP池名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.IpPool'
+      security:
+      - ApiKeyAuth: []
+      summary: Get IpPool
+      tags:
+      - ippools
+  /ippools/{name}/ips:
+    get:
+      consumes:
+      - application/json
+      description: 获取IP池下的IP列表
+      parameters:
+      - description: IP池名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show ips by ipPoolName
+      tags:
+      - ips
+    post:
+      consumes:
+      - application/json
+      description: 新增 Ip
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.IpCreate'
+      - description: IP池名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Ip'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a Ip
+      tags:
+      - ips
+  /ippools/{name}/ips/{address}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除IP
+      parameters:
+      - description: IP池名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a Ip
+      tags:
+      - ips
+  /ippools/{name}/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤IP
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      - description: IP池名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search Ip
+      tags:
+      - ips
+  /ippools/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤IP池
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search IpPool
+      tags:
+      - ippools
+  /logs/:
+    post:
+      consumes:
+      - application/json
+      description: 过滤系统日志
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search user
+      tags:
+      - system_logs
+  /manifest:
+    get:
+      consumes:
+      - application/json
+      description: 获取Kubernetes版本列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.ClusterManifestGroup'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Show all manifest
+      tags:
+      - manifest
+  /manifest/{name}:
+    patch:
+      consumes:
+      - application/json
+      description: 更新 Kubernetes 版本状态
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterManifestUpdate'
+      - description: Kubernetes 版本
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ClusterManifestUpdate'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a manifest
+      tags:
+      - manifest
+  /ntp:
+    post:
+      consumes:
+      - application/json
+      description: 创建ntpServer
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.NtpServerCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.NtpServer'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a NtpServer
+      tags:
+      - NtpServer
+  /ntp/{name}:
+    patch:
+      consumes:
+      - application/json
+      description: 更新NtpServer
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.NtpServerUpdate'
+      - description: 名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.NtpServer'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a Registry
+      tags:
+      - NtpServer
+  /ntp/{name}/:
+    delete:
+      consumes:
+      - application/json
+      description: delete a  Registry by name
+      parameters:
+      - description: CPU 架构
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a Registry
+      tags:
+      - NtpServer
+  /ntpServer:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show ntpServer
+      tags:
+      - ntpServer
+  /plans:
+    get:
+      consumes:
+      - application/json
+      description: 获取部署计划列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all plans
+      tags:
+      - plans
+    post:
+      consumes:
+      - application/json
+      description: 创建部署计划
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PlanCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Plan'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a plan
+      tags:
+      - plans
+  /plans/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除部署计划
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a plan
+      tags:
+      - plans
+    get:
+      consumes:
+      - application/json
+      description: 获取单个部署计划
+      parameters:
+      - description: 部署计划名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Plan'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a Plan
+      tags:
+      - plans
+    patch:
+      consumes:
+      - application/json
+      description: 更新部署计划
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PlanUpdate'
+      - description: 部署计划名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Plan'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a plan
+      tags:
+      - plans
+  /plans/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤部署计划
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search  plans
+      tags:
+      - plans
+  /projects:
+    get:
+      consumes:
+      - application/json
+      description: 获取项目列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all projects
+      tags:
+      - projects
+    post:
+      consumes:
+      - application/json
+      description: 创建项目
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ProjectCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Project'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a project
+      tags:
+      - projects
+  /projects/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除项目
+      parameters:
+      - description: 项目名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a project
+      tags:
+      - projects
+    get:
+      consumes:
+      - application/json
+      description: 获取单个项目
+      parameters:
+      - description: 项目名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Project'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a project
+      tags:
+      - projects
+    patch:
+      consumes:
+      - application/json
+      description: 更新项目
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ProjectUpdate'
+      - description: 项目名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Project'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a project
+      tags:
+      - projects
+  /projects/{project}/clusters/{cluster}/members:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群成员列表
+      parameters:
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all clusterMembers
+      tags:
+      - clusterMembers
+    post:
+      consumes:
+      - application/json
+      description: 授权成员到集群
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterMemberCreate'
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: Array
+      security:
+      - ApiKeyAuth: []
+      summary: Create a cLusterMember
+      tags:
+      - clusterMembers
+  /projects/{project}/clusters/{cluster}/members/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 取消集群人员授权
+      parameters:
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      - description: 人员名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete cLusterMember
+      tags:
+      - clusterMembers
+  /projects/{project}/clusters/{cluster}/resources:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群资源列表
+      parameters:
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all clusterResources
+      tags:
+      - clusterResources
+    post:
+      consumes:
+      - application/json
+      description: 授权资源到集群
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterResourceCreate'
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: Array
+      security:
+      - ApiKeyAuth: []
+      summary: Create a clusterResource
+      tags:
+      - clusterResources
+  /projects/{project}/clusters/{cluster}/resources/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 取消集群资源授权
+      parameters:
+      - description: 资源类型（HOST,PLAN,BACKUP_ACCOUNT）
+        in: query
+        name: resourceType
+        required: true
+        type: string
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      - description: 资源名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete clusterResource
+      tags:
+      - clusterResources
+  /projects/{project}/members:
+    get:
+      consumes:
+      - application/json
+      description: 获取项目成员列表
+      parameters:
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show projectMembers by projectName
+      tags:
+      - projectMembers
+    post:
+      consumes:
+      - application/json
+      description: 授权成员到项目
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ProjectMemberCreate'
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ProjectMember'
+      security:
+      - ApiKeyAuth: []
+  /projects/{project}/members/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 取消项目人员授权
+      parameters:
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      - description: 人员名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete projectMember
+      tags:
+      - projectMembers
+  /projects/{project}/resources:
+    get:
+      consumes:
+      - application/json
+      description: 分页获取项目资源列表
+      parameters:
+      - description: 资源类型（HOST,PLAN,BACKUP_ACCOUNT）
+        in: query
+        name: resourceType
+        required: true
+        type: string
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show projectResources by resourceType
+      tags:
+      - projectResources
+    post:
+      consumes:
+      - application/json
+      description: 授权资源到项目
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ProjectResourceCreate'
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ProjectResource'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a projectResource
+      tags:
+      - projectResources
+  /projects/{project}/resources/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 取消项目资源授权
+      parameters:
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      - description: 资源名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete projectResource
+      tags:
+      - projectResources
+  /projects/{project}/resources/list:
+    get:
+      consumes:
+      - application/json
+      description: 获取能添加到项目的资源
+      parameters:
+      - description: 项目名称
+        in: path
+        name: project
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get projectResources
+      tags:
+      - projectResources
+  /regions:
+    get:
+      consumes:
+      - application/json
+      description: 获取区域列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all regions
+      tags:
+      - regions
+    post:
+      consumes:
+      - application/json
+      description: 创建区域
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegionCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Region'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a region
+      tags:
+      - regions
+  /regions/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除区域
+      parameters:
+      - description: 区域名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a region
+      tags:
+      - regions
+    get:
+      consumes:
+      - application/json
+      description: 获取单个区域
+      parameters:
+      - description: 区域名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Region'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a region
+      tags:
+      - regions
+    patch:
+      consumes:
+      - application/json
+      description: 更新区域
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegionUpdate'
+      - description: 区域名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Region'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a region
+      tags:
+      - regions
+  /regions/datacenter:
+    post:
+      consumes:
+      - application/json
+      description: 获取数据中心
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegionDatacenterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CloudRegionResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get datacenter list
+      tags:
+      - regions
+  /regions/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤部署计划
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search regions
+      tags:
+      - regions
+  /settings:
+    get:
+      consumes:
+      - application/json
+      description: 获取所有系统配置信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.SystemSettingResult'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all SystemSettings
+      tags:
+      - SystemSetting
+    post:
+      consumes:
+      - application/json
+      description: 创建一项配置
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SystemSettingCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.SystemSetting'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Create a SystemSetting
+      tags:
+      - SystemSetting
+  /settings/{name}:
+    get:
+      consumes:
+      - application/json
+      description: 获取单个应用配置的配置信息
+      parameters:
+      - description: 应用名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.SystemSettingResult'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a SystemSettings
+      tags:
+      - SystemSetting
+  /settings/check/{name}:
+    post:
+      consumes:
+      - application/json
+      description: 检查配置是否可用
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SystemSettingCreate'
+      - description: 应用名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.SystemSetting'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Check a SystemSetting
+      tags:
+      - SystemSetting
+  /settings/registry:
+    get:
+      consumes:
+      - application/json
+      description: 获取所有仓库信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all Registry
+      tags:
+      - SystemSetting
+    post:
+      consumes:
+      - application/json
+      description: 创建仓库配置
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SystemSettingCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.SystemRegistry'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a Registry
+      tags:
+      - SystemSetting
+  /settings/registry/{arch}:
+    patch:
+      consumes:
+      - application/json
+      description: 更新仓库配置
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SystemRegistryUpdate'
+      - description: CPU 架构
+        in: path
+        name: arch
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.SystemRegistry'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a Registry
+      tags:
+      - SystemSetting
+  /settings/registry/{arch}/:
+    delete:
+      consumes:
+      - application/json
+      description: delete a  Registry by arch
+      parameters:
+      - description: CPU 架构
+        in: path
+        name: arch
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a Registry
+      tags:
+      - SystemSetting
+  /settings/registry/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 根据 ID 获取仓库信息
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.SystemRegistry'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a Registry
+      tags:
+      - SystemSetting
+  /settings/registry/change/password:
+    post:
+      consumes:
+      - application/json
+      description: 更新 Nexus 密码
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RepoChangePassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: Change user password
+      tags:
+      - SystemSetting
+  /settings/registry/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤仓库
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search  Registry
+      tags:
+      - SystemSetting
+  /templates/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除模版配置
+      parameters:
+      - description: 模版名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a templateConfig
+      tags:
+      - templateConfigs
+    get:
+      consumes:
+      - application/json
+      description: 获取单个模版配置
+      parameters:
+      - description: 模版名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.TemplateConfig'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a TemplateConfig
+      tags:
+      - templateConfigs
+    patch:
+      consumes:
+      - application/json
+      description: 更新模板配置
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TemplateConfig'
+      - description: 模板配置名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.TemplateConfig'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a TemplateConfig
+      tags:
+      - templateConfigs
+  /templates/search:
+    post:
+      consumes:
+      - application/json
+      description: 获取所有的模板配置
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.TemplateConfig'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Show all TemplateConfigs
+      tags:
+      - templateConfigs
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show users
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: 创建用户
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.User'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a user
+      tags:
+      - users
+  /users/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除用户
+      parameters:
+      - description: 用户名
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a user
+      tags:
+      - users
+    get:
+      consumes:
+      - application/json
+      description: 获取单个用户
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.User'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a user
+      tags:
+      - users
+    patch:
+      consumes:
+      - application/json
+      description: 更新用户
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserUpdate'
+      - description: 用户名
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.User'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a user
+      tags:
+      - users
+  /users/change/password:
+    post:
+      consumes:
+      - application/json
+      description: 更新用户密码
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserChangePassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.User'
+      security:
+      - ApiKeyAuth: []
+      summary: Change user password
+      tags:
+      - users
+  /users/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤用户
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search user
+      tags:
+      - users
+  /vmconfigs:
+    get:
+      consumes:
+      - application/json
+      description: 获取虚拟机配置列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all vmConfigs
+      tags:
+      - vmConfigs
+    post:
+      consumes:
+      - application/json
+      description: 创建虚拟机配置
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.VmConfigCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.VmConfig'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a vmConfig
+      tags:
+      - vmConfigs
+  /vmconfigs/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除虚拟机配置
+      parameters:
+      - description: 虚拟机配置名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a vmConfig
+      tags:
+      - vmConfigs
+    get:
+      consumes:
+      - application/json
+      description: 获取单个虚拟机配置
+      parameters:
+      - description: 虚拟机配置名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.VmConfig'
+      security:
+      - ApiKeyAuth: []
+      summary: Get a vmConfig
+      tags:
+      - vmConfigs
+    patch:
+      consumes:
+      - application/json
+      description: 更新虚拟机配置
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.VmConfigUpdate'
+      - description: 虚拟机配置名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.VmConfig'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a vmConfig
+      tags:
+      - vmConfigs
+  /vmconfigs/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤虚拟机配置
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search vmConfigs
+      tags:
+      - vmConfigs
+  /zones:
+    get:
+      consumes:
+      - application/json
+      description: 获取可用区列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Show all zones
+      tags:
+      - zones
+    post:
+      consumes:
+      - application/json
+      description: 创建区域
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ZoneCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Zone'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a zone
+      tags:
+      - zones
+  /zones/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除区域
+      parameters:
+      - description: 可用区名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a zone
+      tags:
+      - zones
+    get:
+      consumes:
+      - application/json
+      description: 获取单个可用区
+      parameters:
+      - description: 可用区名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Zone'
+      security:
+      - ApiKeyAuth: []
+      summary: Show a zone
+      tags:
+      - zones
+    patch:
+      consumes:
+      - application/json
+      description: 更新区域
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ZoneUpdate'
+      - description: 区域名称
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Zone'
+      security:
+      - ApiKeyAuth: []
+      summary: Update a zone
+      tags:
+      - zones
+  /zones/list/{region}:
+    get:
+      consumes:
+      - application/json
+      description: 获取跟区域关联的可用区
+      parameters:
+      - description: 区域名称
+        in: path
+        name: region
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: Array
+      security:
+      - ApiKeyAuth: []
+      summary: Get zones by region
+      tags:
+      - zones
+  /zones/search:
+    post:
+      consumes:
+      - application/json
+      description: 过滤部署计划
+      parameters:
+      - description: conditions
+        in: body
+        name: conditions
+        required: true
+        schema:
+          $ref: '#/definitions/condition.Conditions'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/page.Page'
+      security:
+      - ApiKeyAuth: []
+      summary: Search zones
+      tags:
+      - zones
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

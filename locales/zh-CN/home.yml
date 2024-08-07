@@ -1,0 +1,149 @@
+#common
+NAME_EXISTS: "名称已存在"
+IP_NOT_EXISTS: "请在系统设置页面填写仓库IP"
+
+#cluster
+CLUSTER_DELETE_FAILED: "无法删除当前状态的集群"
+CLUSTER_IS_NOT_RUNNING: "集群不在运行中！"
+CLUSTER_IS_NOT_LOCAL: "导入集群无法升级"
+CLUSTER_NO_FLEX: "未能找到弹性 ip"
+NO_MASTER_AVAILABLE: "未能找到可用的 master 节点"
+
+
+#credential
+DELETE_FAILED_RESOURCE: "删除失败！该秘钥下有关联主机"
+DELETE_FAILED_RESOURCE_ZONE: "删除失败！该秘钥下有关联可用区"
+DEFAULT_CREDENTIAL_CAN_NOT_DELETE: "默认凭据不能删除！"
+NAME_CHECK_FAILED: "秘钥名称不能与用户名相同"
+PASSWORD_CAN_NOT_NULL: "密码不能为空！"
+PRIVATE_KEY_CAN_NOT_NULL: "秘钥不能为空！"
+
+
+#host
+HOST_ALREADY_EXISTS: "主机已存在"
+DELETE_HOST_FAILED: "删除失败！该主机已经关联集群"
+DELETE_HOST_FAILED_BY_PROJECT: "删除失败！该主机已经关联项目！"
+SYSTEM_IP_NOT_FOUND: "请先填写本机IP！"
+NO_IP_AVAILABLE: "IP 资源不足"
+IS_LOCAL_HOST: "该主机与仓库 IP 冲突，未能成功添加"
+HOST_IMPORT_ERROR_NULL: "未找到可导入的数据！请检查导入文件！"
+HOST_IMPORT_NULL_VALUE: "%s 行有空数据"
+HOST_IMPORT_NOT_COMPLETE_VALUE: "%s 行数据不完整"
+HOST_IMPORT_WRONG_FORMAT: "%s 行端口格式不正确"
+HOST_IMPORT_CREDENTIAL_NOT_FOUND: "%s 行找不到密钥"
+HOST_IMPORT_PROJECT_NOT_FOUND: "%s 行找不到项目"
+HOST_IMPORT_FAILED_NUM: "共 %s 行数据不正常，跳过"
+HOST_RESOURCE_FAILED_BIND: "主机资源 %s 保存失败，原因：%s"
+HOST_IMPORT_FAILED_SAVE: "主机 %s 保存失败，原因：%s"
+
+
+#user
+PASSWORD_NOT_MATCH: "密码错误"
+ORIGINAL_NOT_MATCH: "原密码错误"
+USER_IS_NOT_ACTIVE: "用户未启用！请联系管理员！"
+USER_NOT_FOUND: "无此用户！"
+ADMIN_CAN_NOT_DELETE: "默认 admin 用户不能被删除！"
+USER_IS_NOT_RELATED_PROJECT: "用户没有关联项目"
+LDAP_CAN_NOT_UPDATE: "LDAP 用户不能修改！"
+VERIFY_CODE_FAILED: "验证码错误"
+EMAIL_DISABLE: "邮件设置被禁用！请联系管理员"
+EMAIL_NOT_MATCH: "邮件匹配失败！"
+NAME_PASSWORD_SAME_FAILED: "用户名不能与密码相同"
+NAME_PASSWORD_ERROR: "用户名或密码错误"
+EMAIL_EXIST: "邮箱已存在"
+NO_KUBEPI_ADMIN: "请先在系统设置中设置 kubepi amdin 密码"
+NO_KUBEPI_PROJECT: "请先在项目管理中设置 kubepi 登录信息"
+
+
+#region
+DELETE_REGION_FAILED_RESOURCE: "删除失败！该区域已经关联可用区"
+
+#zone
+DELETE_ZONE_FAILED_RESOURCE: "删除失败！该可用区已经关联部署计划"
+CLUSTER_IS_NULL: "获取不到集群！请检查配置！"
+IMAGE_IS_NULL: "获取不到镜像！请检查配置！"
+IP_SHORT: "Ip 不足"
+
+
+#openstack
+GET_REGION_ERROR: "找不到区域"
+
+#projectMember
+USER_IS_ADD: "%s 用户已经添加"
+USER_IS_NOT_FOUND: "%s 用户未找到！"
+
+#project
+DEFAULT_PROJECT_CAN_NOT_DELETE: "默认项目不能删除！"
+PROJECT_HAS_CLUSTER: "项目关联集群！不能删除！"
+
+#node
+NODE_ALREADY_RUNNING_TASK: "其他节点操作正在执行, 请等待它们执行完毕."
+
+#backupAccount
+PARAM_EMPTY: "参数不足"
+NOT_SUPPORT: "不支持的类型"
+CHECK_FAILED: "校验失败！"
+DELETE_BACKUP_ACCOUNT_FAILED_BY_PROJECT: "删除失败！该备份账号已经关联项目！"
+
+#plan
+DELETE_PLAN_FAILED: "删除失败！该部署计划已在项目下集群中使用"
+DELETE_FAILED_BY_PROJECT: "删除失败！该部署计划已经关联项目"
+
+#clusterBackup
+DELETE_BACKUP_FAILED: "删除失败！该备份账号已在项目下集群中使用"
+BACKUP_FILES_NOT_NULL: "请先删除备份文件再切换备份账号"
+CLUSTER_IS_BACKUP: "集群正在备份中！"
+CLUSTER_IS_RESTORE: "集群正在恢复中！"
+
+#projectResource
+DELETE_FAILED_BY_BACKUP_FILE: "请先删除备份文件！"
+DELETE_HOST_FAILED_BY_CLUSTER: "主机已经属于集群！不能进行此操作！"
+HOST_IS_NOT_FOUND: "%s 主机不存在"
+RESOURCE_IS_ADDED: "%s 资源已添加"
+PLAN_IS_NOT_FOUND: "%s 部署计划不存在"
+BACKUP_ACCOUNT_IS_NOT_FOUND: "%s 备份账号不存在"
+
+#ldap
+LDAP_USER_IS_NULL: "同步到的用户为0"
+LDAP_LOGIN_USER_IS_NULL: "用户不存在！"
+LDAP_DISABLE: "系统禁止LDAP用户登陆 请联系管理员！"
+LDAP_DISABLE_STATUS: "请先启用LDAP"
+
+#cis
+CIS_TASK_ALREADY_RUNNING: "已存在扫描中的任务"
+
+#vmConfig
+VM_CONFIG_EXISTS: "配置已存在"
+VM_CONFIG_DELETE_FAILED: "配置已经属于部署计划！不能进行此操作！"
+
+#ip
+IP_EXISTS: "填写的IP段与已有IP段冲突，请重新填写"
+IP_NOT_AVAILABLE: "IP %s 被占用，不能被释放"
+IP_INVALID: "IP地址不正确！"
+IP_NULL: "生成的IP地址数量为0 请检查起始地址和子网！"
+
+#ip-pool
+IP_POOL_DELETE_FAILED: "Ip 池已经关联可用区，无法删除"
+
+#registry
+REGISTRY_ALREADY_EXISTS: "该架构类型的仓库已经存在"
+REGISTRY_ALREADY_USED: "该架构类型的仓库正被使用"
+NEXUS_UNAVAILABLE: "Nexus 连接信息不正确，请重试！"
+
+#clusterResource
+CLUSTER_PROVIDER_ERROR: "自动模式创建的集群不能手动修改主机资源"
+RESOURCE_TYPE_ERROR: "不支持添加的类型！仅支持 HOST,BACKUP_ACCOUNT"
+DELETE_BACKUP_ACCOUNT_FAILED_BY_CLUSTER: "删除失败！该备份账号关联的备份策略在启用中！"
+
+#session
+SESSION_KEY_NOT_FOUND: "session key 无效"
+USER_PROFILE_INVALID: "session 用户转化失败"
+USER_HAS_NO_RESOURCE: "用户未绑定到项目或集群"
+
+
+#storage
+PROVISIONER_EXSIT: "已存在存储提供商"
+TASK_IN_EXECUTION: "当前集群有任务在执行中，请稍候重试..."
+
+#component
+COMPONENT_EXIST: "组件已存在，请勿重复操作！"
